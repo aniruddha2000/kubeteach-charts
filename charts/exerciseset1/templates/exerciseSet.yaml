@@ -242,3 +242,21 @@ spec:
                 operator: "contains"
                 value: "nginx"
         points: 5
+    - name: task14
+    taskDefinitionSpec:
+      points: 5
+      requiredTaskName: task03
+      taskCondition:
+      - apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        name: kubeteach-ingress
+        namespace: kubeteach
+        resourceCondition:
+        - field: spec.rules.0.http.paths.0.path
+          operator: eq
+          value: /app
+      taskSpec:
+        description: Create an Ingress resource named kubeteach-ingress in namespace
+          kubeteach that routes traffic to kubeteach-webserver on path /app
+        title: Expose deployment with Ingress
+        helpURL: "https://kubernetes.io/docs/concepts/services-networking/ingress/"
